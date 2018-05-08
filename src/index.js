@@ -1,11 +1,47 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import './style.scss';
-import example from './example/example_module.js'
+import 'phaser';
+import logo from './assets/logo.png'
+import invader from './assets/space_invaders.png'
 
-const Index = () => {
-  return <div className="hello">Hello React! <div className="world">hello world</div></div>;
+var config = {
+    type: Phaser.AUTO,
+    parent: 'phaser-example',
+    width: 800,
+    height: 600,
+    scene: {
+        preload: preload,
+        create: create
+    }
 };
 
-ReactDOM.render(<Index />, document.getElementById("index"));
+var game = new Phaser.Game(config);
 
+function preload ()
+{
+    this.load.image('logo', logo);
+    this.load.image('invader', invader);
+}
+
+function create ()
+{
+    var logo = this.add.image(400, 150, 'logo');
+    var invader = this.add.image(400, 150, 'invader');
+
+    this.tweens.add({
+        targets: logo,
+        y: 300,
+        duration: 2000,
+        ease: 'Power2',
+        yoyo: true,
+        loop: -1
+    });
+
+    this.tweens.add({
+      targets: invader,
+      y: 300,
+      duration: 2000,
+      ease: 'Power2',
+      yoyo: true,
+      loop: -1
+    });
+
+}

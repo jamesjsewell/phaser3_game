@@ -27,6 +27,10 @@ module.exports = {
                     ignore: /backend/
                   }
                 }
+            },
+            {
+                test: [ /\.vert$/, /\.frag$/ ],
+                use: 'raw-loader'
             }
         ]
     },
@@ -36,6 +40,10 @@ module.exports = {
             title: 'webpack_setup',
             template: "./src/index.html",
             filename: "index.html"
+        }),
+        new webpack.DefinePlugin({
+            'CANVAS_RENDERER': JSON.stringify(true),
+            'WEBGL_RENDERER': JSON.stringify(true)
         })
     ]
 };
